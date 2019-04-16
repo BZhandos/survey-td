@@ -1,7 +1,7 @@
 {
   "surveys": [
     {
-      "title": "opros 1",
+      "title": "full stack questions",
       "questions": [
         {
           "question": "Вопрос1 текст в одну строку",
@@ -42,11 +42,48 @@
           "question": "Вопрос9 Телефон",
           "type": 8,
           "answer": ""
+        },
+        {
+          "question": "Вопрос7 один ответ",
+          "type": 6,
+          "answer": [
+            {"id":1, "name":"variant A"},
+            {"id":2, "name":"variant B"},
+            {"id":3, "name":"variant C"},
+            {"id":4, "name":"variant D"}
+          ]
+        },
+        {
+          "question": "Вопрос10 список ответов",
+          "type": 9,
+          "answer": [
+            {"id":1, "name":"variant A"},
+            {"id":2, "name":"variant B"},
+            {"id":3, "name":"variant C"},
+            {"id":4, "name":"variant D"}
+          ]
         }
+
       ]
     },
     {
-      "title": "opros 2",
+      "title": "sample questionare 2",
+      "questions": [
+        {
+          "question": "текст в одну строку",
+          "type": 0,
+          "answer": ""
+        },
+        {
+          "question": "текст в несколько строк",
+          "type": 1,
+          "answer": ""
+        }
+      ]
+    }
+  ,
+    {
+      "title": "sample questionare 3",
       "questions": [
         {
           "question": "текст в одну строку",

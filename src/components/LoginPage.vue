@@ -5,28 +5,20 @@
                 wrap
         >
             <v-flex xs12>
-                <v-img
-                        :src="require('../assets/logo.svg')"
-                        class="my-3"
-                        contain
-                        height="100"
-                ></v-img>
-            </v-flex>
-            <v-flex xs12>
                 <h3 class="display-1 font-weight-bold mb-3">
-                    Welcome to Survey
+                    Вход в админку
                 </h3>
             </v-flex>
             <v-flex mb-4>
                 <v-text-field
-                        label="Enter email"
+                        label="Логин"
                         single-line
                         prepend-icon="person"
                         v-model="email"
                 ></v-text-field>
                 <v-text-field
                         :type="'password'"
-                        label="Enter password"
+                        label="Пароль"
                         single-line
                         prepend-icon="lock"
                         v-model="password"

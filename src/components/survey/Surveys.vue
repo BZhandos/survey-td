@@ -7,7 +7,9 @@
                         color="cyan"
                         dark
                 >
-                    <v-toolbar-side-icon to="/login"></v-toolbar-side-icon>
+                    <v-toolbar-side-icon to="/login">
+                        <v-icon>accessibility</v-icon>
+                    </v-toolbar-side-icon>
                     <v-toolbar-title>Добро пожаловать!</v-toolbar-title>
                     <v-spacer></v-spacer>
                 </v-toolbar>
