@@ -1,0 +1,64 @@
+{
+  "surveys": [
+    {
+      "title": "opros 1",
+      "questions": [
+        {
+          "question": "Вопрос1 текст в одну строку",
+          "type": 0,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос2 текст в несколько строк",
+          "type": 1,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос3 email",
+          "type": 2,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос4 iin 13 digits",
+          "type": 3,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос5 целое число",
+          "type": 4,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос6 дробное число",
+          "type": 5,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос8 Дата",
+          "type": 7,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос9 Телефон",
+          "type": 8,
+          "answer": ""
+        }
+      ]
+    },
+    {
+      "title": "opros 2",
+      "questions": [
+        {
+          "question": "текст в одну строку",
+          "type": 0,
+          "answer": ""
+        },
+        {
+          "question": "текст в несколько строк",
+          "type": 1,
+          "answer": ""
+        }
+      ]
+    }
+  ]
+}
