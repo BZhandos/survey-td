@@ -74,7 +74,7 @@
                             ></v-text-field>
                             <v-text-field
                                     v-if="quest.type==8"
-                                    label="+7 (123) 456 7890"
+                                    label="+7 (---) --- ----"
                                     :mask="phone"
                                     single-line
                                     :rules="[rules.required]"
@@ -90,14 +90,12 @@
                                 </v-radio-group>
                             </template>
                             <template v-if="quest.type==9">
-                                <v-checkbox-group>
-                                    <v-checkbox
-                                            v-for="n in quest.answer"
-                                            :key="n.id"
-                                            :label="`${n.name}`"
-                                            :value="n.id"
-                                    ></v-checkbox>
-                                </v-checkbox-group>
+                                <v-checkbox
+                                        v-for="n in quest.answer"
+                                        :key="n.id"
+                                        :label="`${n.name}`"
+                                        :value="n.id"
+                                ></v-checkbox>
                             </template>
                         </template>
                         <v-btn block color="primary" @click="">Отправить
@@ -114,7 +112,7 @@
             return {
                 IINmask: '#############',
                 phone: '+7 (###) ### - ####',
-                date: '##/##/####',
+                date: '##/##/##',
                 rules: {
                     required: value => !!value || 'Обязательное поле',
                     counter: value => value.length <= 20 || 'Max 20 characters',
