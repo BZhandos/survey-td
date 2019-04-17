@@ -7,6 +7,7 @@ import VueRouter from 'vue-router'
 import VueSession from 'vue-session'
 import { routes } from './routes'
 import { store } from './store/store'
+import './registerServiceWorker'
 
 Vue.use(VueRouter)
 Vue.use(Vuetify)
