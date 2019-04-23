@@ -35,8 +35,8 @@ import Json from './in.json';
                 return '/survey/' + value
             },
             GoToSurvey (value) {
-                this.$store.state.test = value
-                this.$router.push('/survey/:slug')
+                this.$store.state.test = value;
+                this.$router.push('/survey/' + value.id)
             }
         }
     }

@@ -3,6 +3,9 @@
 import { register } from 'register-service-worker'
 
 if (process.env.NODE_ENV === 'production') {
+    self.addEventListener('install', function(e) {
+        console.log('[ServiceWorker] Installed');
+    })
   register(`${process.env.BASE_URL}service-worker.js`, {
     ready () {
       console.log(

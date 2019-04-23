@@ -23,83 +23,87 @@
                     <v-divider></v-divider>
 
                     <v-card-text>
-                        <template v-for="quest in test.questions">
-                            <p class="title">{{ quest.question  }}</p>
-                            <v-text-field
-                                    v-if="quest.type==0"
-                                    label="Краткий ответ"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <v-textarea
-                                    v-if="quest.type==1"
-                                    rows="2"
-                                    box
-                                    auto-grow
-                                    label="Развернутый ответ"
-                                    :rules="[rules.required]"
-                            ></v-textarea>
-                            <v-text-field
-                                    v-if="quest.type==2"
-                                    label="Email"
-                                    :rules="[rules.required, rules.email]"
-                                    single-line
-                            ></v-text-field>
-                            <v-text-field
-                                    v-if="quest.type==3"
-                                    label="ИИН"
-                                    :mask="IINmask"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <v-text-field
-                                    v-if="quest.type==4"
-                                    label="Целое число"
-                                    :mask="IINmask"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <v-text-field
-                                    v-if="quest.type==5"
-                                    label="Дробное число"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <v-text-field
-                                    v-if="quest.type==7"
-                                    label="День/Месяц/Год"
-                                    :mask="date"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <v-text-field
-                                    v-if="quest.type==8"
-                                    label="+7 (---) --- ----"
-                                    :mask="phone"
-                                    single-line
-                                    :rules="[rules.required]"
-                            ></v-text-field>
-                            <template v-if="quest.type==6">
-                                <v-radio-group>
-                                    <v-radio
+                        <template v-for="(quest,key) in test.questions">
+                                <p class="title"> {{ quest.question  }}</p>
+                                <v-text-field
+                                        v-if="quest.type==0"
+                                        label="Краткий ответ"
+                                        single-line
+                                        :rules="[rules.required]"
+                                        v-model="bank[key]"
+                                ></v-text-field>
+                                <v-textarea
+                                        v-if="quest.type==1"
+                                        rows="2"
+                                        box
+                                        auto-grow
+                                        label="Развернутый ответ"
+                                        :rules="[rules.required]"
+                                        v-model="bank[key]"
+                                ></v-textarea>
+                                <v-text-field
+                                        v-if="quest.type==2"
+                                        label="Email"
+                                        :rules="[rules.required, rules.email]"
+                                        single-
+                                        v-model="bank.answer"
+                                ></v-text-field>
+                                <v-text-field
+                                        v-if="quest.type==3"
+                                        label="ИИН"
+                                        :mask="IINmask"
+                                        single-line
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                                <v-text-field
+                                        v-if="quest.type==4"
+                                        label="Целое число"
+                                        :mask="IINmask"
+                                        single-line
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                                <v-text-field
+                                        v-if="quest.type==5"
+                                        label="Дробное число"
+                                        single-line
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                                <v-text-field
+                                        v-if="quest.type==7"
+                                        label="День/Месяц/Год"
+                                        :mask="date"
+                                        single-line
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                                <v-text-field
+                                        v-if="quest.type==8"
+                                        label="+7 (---) --- ----"
+                                        :mask="phone"
+                                        single-line
+                                        :rules="[rules.required]"
+                                ></v-text-field>
+                                <template v-if="quest.type==6">
+                                    <v-radio-group>
+                                        <v-radio
+                                                v-for="n in quest.answer"
+                                                :key="n.id"
+                                                :label="`${n.name}`"
+                                                :value="n.id"
+                                        ></v-radio>
+                                    </v-radio-group>
+                                </template>
+                                <template v-if="quest.type==9">
+                                    <v-checkbox
                                             v-for="n in quest.answer"
-                                            :key="n.id"
+                                            :key="n.name"
                                             :label="`${n.name}`"
-                                            :value="n.id"
-                                    ></v-radio>
-                                </v-radio-group>
-                            </template>
-                            <template v-if="quest.type==9">
-                                <v-checkbox
-                                        v-for="n in quest.answer"
-                                        :key="n.id"
-                                        :label="`${n.name}`"
-                                        :value="n.id"
-                                ></v-checkbox>
-                            </template>
+                                            :value="n.name"
+                                    ></v-checkbox>
+                                </template>
                         </template>
-                        <v-btn block color="primary" @click="">Отправить
+                        <v-btn block color="primary" @click="Send()">Отправить
                         </v-btn>
+                            <p>{{ bank }}</p>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -107,6 +111,7 @@
     </v-card>
 </template>
 <script>
+    import axios from 'axios'
     export default {
         data () {
             return {
@@ -120,6 +125,11 @@
                         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                         return pattern.test(value) || 'Некорректный e-mail.'
                    }
+                },
+                bank: [],
+                pushQuery: {
+                    question: '',
+                    answer: ''
                 }
             }
         },
@@ -131,6 +141,14 @@
         methods: {
             goBack() {
                 this.$router.push('/')
+            },
+            pushBank() {
+                return this.bank.push(this.pushQuery);
+            },
+            Send(bank) {
+                axios.post('URL HERE', bank)
+                    .then(res => console.log(res))
+                    .catch(error => console.log(error))
             }
         }
     }

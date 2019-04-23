@@ -2,6 +2,7 @@
   "surveys": [
     {
       "title": "full stack questions",
+      "id": "001",
       "questions": [
         {
           "question": "Вопрос1 текст в одну строку",
@@ -54,7 +55,7 @@
           ]
         },
         {
-          "question": "Вопрос10 список ответов",
+          "question": "Юра",
           "type": 9,
           "answer": [
             {"id":1, "name":"variant A"},
