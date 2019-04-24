@@ -31,17 +31,11 @@ import Json from './in.json';
             Json
         }),
         methods: {
-            CreateLink (value) {
-                return '/survey/' + value
-            },
             GoToSurvey (value) {
                 this.$store.state.test = value;
                 this.$router.push('/survey/' + value.id)
             }
         }
     }
-console.log(Json);
 </script>
 
-<style scoped>
-</style>

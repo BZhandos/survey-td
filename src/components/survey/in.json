@@ -55,13 +55,13 @@
           ]
         },
         {
-          "question": "Юра",
+          "question": "несколько на выбор",
           "type": 9,
           "answer": [
-            {"id":1, "name":"variant A"},
-            {"id":2, "name":"variant B"},
-            {"id":3, "name":"variant C"},
-            {"id":4, "name":"variant D"}
+            {"id":1, "name":"variant A", "checked":  null},
+            {"id":2, "name":"variant B", "checked":  null},
+            {"id":3, "name":"variant C", "checked":  null},
+            {"id":4, "name":"variant D", "checked":  null}
           ]
         }
 
@@ -79,6 +79,26 @@
           "question": "текст в несколько строк",
           "type": 1,
           "answer": ""
+        },
+        {
+          "question": "несколько на выбор",
+          "type": 9,
+          "answer": [
+            {"id":1, "name":"variant A", "check":  false},
+            {"id":2, "name":"variant B", "check":  false},
+            {"id":3, "name":"variant C", "check":  false},
+            {"id":4, "name":"variant D", "check":  false}
+          ]
+        },
+        {
+          "question": "несколько на выбор 2",
+          "type": 9,
+          "answer": [
+            {"id":1, "name":"variant A2", "check":  false},
+            {"id":2, "name":"variant B2", "check":  false},
+            {"id":3, "name":"variant C2", "check":  false},
+            {"id":4, "name":"variant D2", "check":  false}
+          ]
         }
       ]
     }
@@ -95,6 +115,21 @@
           "question": "текст в несколько строк",
           "type": 1,
           "answer": ""
+        },
+        {
+          "question": "текст в несколько строк",
+          "type": 1,
+          "answer": ""
+        },
+        {
+          "question": "Вопрос7 один ответ",
+          "type": 6,
+          "answer": [
+            {"id":1, "name":"variant A", "value":  1},
+            {"id":2, "name":"variant B", "value":  2},
+            {"id":3, "name":"variant C", "value":  3},
+            {"id":4, "name":"variant D", "value":  4}
+          ]
         }
       ]
     }
