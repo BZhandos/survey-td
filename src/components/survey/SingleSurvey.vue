@@ -23,12 +23,16 @@
                     <v-divider></v-divider>
 
                     <v-card-text>
+                        <v-form
+                                ref="form"
+                                v-model="valid"
+                                lazy-validation
+                        >
                         <template v-for="(quest,key) in test.questions">
                                 <p class="title"> {{ quest.question  }}</p>
                                 <v-text-field
                                         v-if="quest.type==0"
                                         label="Краткий ответ"
-                                        single-line
                                         :rules="[rules.required, rules.counter]"
                                         v-model="quest.answer"
                                 ></v-text-field>
@@ -91,7 +95,6 @@
                                     <v-radio-group>
                                         <v-radio
                                                 v-for="n in quest.answer"
-                                                :key="n.id"
                                                 :label="`${n.name}`"
                                                 :value="n.id"
                                         ></v-radio>
@@ -104,10 +107,16 @@
                                         :value= false
                                         :key= false
                                         v-model="n.check"
+                                        required
                                     ></v-checkbox>
                                 </template>
                         </template>
-                        <v-btn block color="primary" @click="Send()">Отправить
+                        </v-form>
+                        <v-btn block color="primary"
+                               :disabled="!valid"
+                               @click="validate"
+                        >
+                            Отправить
                         </v-btn>
                             <p>{{ test }}</p>
                     </v-card-text>
@@ -131,8 +140,19 @@
                         const pattern = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
                         return pattern.test(value) || 'Некорректный e-mail.'
                    }
-                }
+                },
+                connectivityStatus: true,
+                valid: false,
             }
+        },
+        created() {
+            window.addEventListener('offline', () => {
+                this.connectivityStatus = false;
+            })
+            window.addEventListener('online', () => {
+                this.connectivityStatus = true;
+            })
+
         },
         computed: {
             test () {
@@ -143,10 +163,15 @@
             goBack() {
                 this.$router.push('/')
             },
+            validate () {
+                if (this.$refs.form.validate()) {
+                    this.snackbar = true;
+                    this.Send()
+                }
+            },
             Send() {
-                axios.post('URL HERE', this.test)
-                    .then(res => console.log(res))
-                    .catch(error => console.log(error))
+                this.offlineBank.push(this.bank);
+                this.$refs.form.reset();
                 this.$router.push('/')
             }
         }

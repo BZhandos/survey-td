@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 import Json from './in.json';
     export default {
         data: () => ({
@@ -35,6 +36,16 @@ import Json from './in.json';
                 this.$store.state.test = value;
                 this.$router.push('/survey/' + value.id)
             }
+        },
+        created() {
+            window.addEventListener('online', () => {
+                if (this.offlineBank != '') {
+                    axios.post('URL HERE', this.offlineBank)
+                        .then(res => console.log(res))
+                        this.offlineBank=''
+                        .catch(error => console.log(error))
+                }
+            })
         }
     }
 </script>

@@ -1,33 +1,33 @@
 {
   "surveys": [
     {
-      "title": "full stack questions",
+      "title": "Оценка Сервиса",
       "id": "001",
       "questions": [
         {
           "question": "Вопрос1 текст в одну строку",
           "type": 0,
-          "answer": ""
+          "answer": []
         },
         {
           "question": "Вопрос2 текст в несколько строк",
           "type": 1,
-          "answer": ""
+          "answer": []
         },
         {
           "question": "Вопрос3 email",
           "type": 2,
-          "answer": ""
+          "answer": []
         },
         {
           "question": "Вопрос4 iin 13 digits",
           "type": 3,
-          "answer": ""
+          "answer": []
         },
         {
           "question": "Вопрос5 целое число",
           "type": 4,
-          "answer": ""
+          "answer": []
         },
         {
           "question": "Вопрос6 дробное число",
@@ -68,7 +68,7 @@
       ]
     },
     {
-      "title": "sample questionare 2",
+      "title": "Оценка качества товара",
       "questions": [
         {
           "question": "текст в одну строку",
@@ -104,7 +104,7 @@
     }
   ,
     {
-      "title": "sample questionare 3",
+      "title": "кто ты",
       "questions": [
         {
           "question": "текст в одну строку",
@@ -125,10 +125,10 @@
           "question": "Вопрос7 один ответ",
           "type": 6,
           "answer": [
-            {"id":1, "name":"variant A", "value":  1},
-            {"id":2, "name":"variant B", "value":  2},
-            {"id":3, "name":"variant C", "value":  3},
-            {"id":4, "name":"variant D", "value":  4}
+            {"id":1, "name":"variant A", "value":  ""},
+            {"id":2, "name":"variant B", "value":  ""},
+            {"id":3, "name":"variant C", "value":  ""},
+            {"id":4, "name":"variant D", "value":  ""}
           ]
         }
       ]
