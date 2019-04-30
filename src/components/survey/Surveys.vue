@@ -15,38 +15,62 @@
                 </v-toolbar>
 
 
-                    <template v-for="value in Json.surveys">
+                    <template v-for="value in data">
                         <v-btn block color="primary" @click="GoToSurvey(value)">
-                            {{ value.title }}
+                            {{ value.name }}
                         </v-btn>
                     </template>
+    {{localS}}
 
             </v-card>
 </template>
 
 <script>
 import axios from 'axios'
-import Json from './in.json';
+// import Json from './in.json';
     export default {
-        data: () => ({
-            Json
-        }),
+        data() {
+            return {
+                data: null
+            };
+        },
+        mounted() {
+            if ( ! navigator.onLine) {
+                console.log ('OFFline now');
+                this.data = JSON.parse(localStorage.storeApi);
+                // this.data = {
+                //     SurveyBank: localStorage.getItem('SurveyBank'),
+                // }
+            } else {
+                console.log ('online now');
+                this.fetchDataForToday();
+                // this.data = localStorage.getItem('SurveyBank');
+            }
+        },
         methods: {
+            fetchDataForToday() {
+                axios
+                    .get("https://172.16.12.104:9002/api/all")
+                    .then(response => {
+                        localStorage.storeApi = JSON.stringify(response.data);
+                        this.data = response.data
+                    });
+            },
             GoToSurvey (value) {
                 this.$store.state.test = value;
                 this.$router.push('/survey/' + value.id)
             }
         },
-        created() {
-            window.addEventListener('online', () => {
-                if (this.offlineBank != '') {
-                    axios.post('URL HERE', this.offlineBank)
-                        .then(res => console.log(res))
-                        this.offlineBank=''
-                        .catch(error => console.log(error))
-                }
-            })
-        }
+        // created() {
+        //     window.addEventListener('online', () => {
+        //         if (this.offlineBank != '') {
+        //             axios.post('URL HERE', this.offlineBank)
+        //                 .then(res => console.log(res))
+        //                 this.offlineBank=''
+        //                 .catch(error => console.log(error))
+        //         }
+        //     })
+        // }
     }
 </script>
 

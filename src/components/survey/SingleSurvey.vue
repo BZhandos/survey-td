@@ -15,7 +15,7 @@
             <v-flex xs10 offset-xs1>
                 <v-card class="card--flex-toolbar">
                     <v-toolbar card prominent>
-                        <v-toolbar-title class="body-2 orange--text">{{ test.title }}</v-toolbar-title>
+                        <v-toolbar-title class="body-2 orange--text">{{ test.name }}</v-toolbar-title>
 
                         <v-spacer></v-spacer>
                     </v-toolbar>
@@ -28,8 +28,8 @@
                                 v-model="valid"
                                 lazy-validation
                         >
-                        <template v-for="(quest,key) in test.questions">
-                                <p class="title"> {{ quest.question  }}</p>
+                        <template v-for="(quest,key) in test.Questions">
+                                <p class="title"> {{ quest.name  }}</p>
                                 <v-text-field
                                         v-if="quest.type==0"
                                         label="Краткий ответ"
