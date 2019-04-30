@@ -28,13 +28,13 @@
                                 v-model="valid"
                                 lazy-validation
                         >
-                        <template v-for="(quest,key) in test.Questions">
+                        <template v-for="quest in test.Questions">
                                 <p class="title"> {{ quest.name  }}</p>
                                 <v-text-field
                                         v-if="quest.type==0"
                                         label="Краткий ответ"
                                         :rules="[rules.required, rules.counter]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-textarea
                                         v-if="quest.type==1"
@@ -43,14 +43,14 @@
                                         auto-grow
                                         label="Развернутый ответ"
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-textarea>
                                 <v-text-field
                                         v-if="quest.type==2"
                                         label="Email"
                                         :rules="[rules.required, rules.email]"
                                         single-
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-text-field
                                         v-if="quest.type==3"
@@ -58,7 +58,7 @@
                                         :mask="IINmask"
                                         single-line
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-text-field
                                         v-if="quest.type==4"
@@ -66,14 +66,14 @@
                                         :mask="IINmask"
                                         single-line
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-text-field
                                         v-if="quest.type==5"
                                         label="Дробное число"
                                         single-line
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-text-field
                                         v-if="quest.type==7"
@@ -81,7 +81,7 @@
                                         :mask="date"
                                         single-line
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
                                 <v-text-field
                                         v-if="quest.type==8"
@@ -89,36 +89,34 @@
                                         :mask="phone"
                                         single-line
                                         :rules="[rules.required]"
-                                        v-model="quest.answer"
+                                        v-model="quest.Answers"
                                 ></v-text-field>
-                                <template v-if="quest.type==6">
-                                    <v-radio-group>
-                                        <v-radio
-                                                v-for="n in quest.answer"
-                                                :label="`${n.name}`"
-                                                :value="n.id"
-                                        ></v-radio>
-                                    </v-radio-group>
-                                </template>
+                                <!--<template v-if="quest.type==6">-->
+                                    <!--<v-radio-group>-->
+                                        <!--<v-radio-->
+                                                <!--v-for="n in quest.Answers"-->
+                                                <!--:label="`${n.name}`"-->
+                                                <!--:value="n.id"-->
+                                        <!--&gt;</v-radio>-->
+                                    <!--</v-radio-group>-->
+                                <!--</template>-->
                                 <template v-if="quest.type==9">
                                     <v-checkbox
-                                        v-for="n in quest.answer"
+                                        v-for="n in quest.Answers"
                                         :label="`${n.name}`"
                                         :value= false
                                         :key= false
-                                        v-model="n.check"
+                                        v-model="n.checked"
                                         required
                                     ></v-checkbox>
                                 </template>
                         </template>
                         </v-form>
                         <v-btn block color="primary"
-                               :disabled="!valid"
                                @click="validate"
                         >
                             Отправить
                         </v-btn>
-                            <p>{{ test }}</p>
                     </v-card-text>
                 </v-card>
             </v-flex>
@@ -143,6 +141,12 @@
                 },
                 connectivityStatus: true,
                 valid: false,
+                respondentanswer: {
+                    id: null,
+                    name: '',
+                    content: '345345345345345',
+                    surveyId: ''
+                }
             }
         },
         created() {
@@ -164,13 +168,19 @@
                 this.$router.push('/')
             },
             validate () {
-                if (this.$refs.form.validate()) {
-                    this.snackbar = true;
-                    this.Send()
-                }
+                // if (this.$refs.form.validate()) {
+                //     this.snackbar = true;
+                //     this.Send()
+                // }
+                this.Send()
             },
             Send() {
-                this.offlineBank.push(this.bank);
+                this.respondentanswer.name = this.test.name;
+                this.respondentanswer.content = JSON.stringify(this.test.Questions, null, '\t');
+                this.respondentanswer.surveyId = this.test.id;
+                console.log(this.respondentanswer)
+                axios.post("https://172.16.12.104:9002/api/respondents", this.respondentanswer)
+                .then(res => console.log('send'))
                 this.$refs.form.reset();
                 this.$router.push('/')
             }

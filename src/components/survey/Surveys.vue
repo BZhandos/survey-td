@@ -20,7 +20,6 @@
                             {{ value.name }}
                         </v-btn>
                     </template>
-    {{localS}}
 
             </v-card>
 </template>
@@ -38,13 +37,9 @@ import axios from 'axios'
             if ( ! navigator.onLine) {
                 console.log ('OFFline now');
                 this.data = JSON.parse(localStorage.storeApi);
-                // this.data = {
-                //     SurveyBank: localStorage.getItem('SurveyBank'),
-                // }
             } else {
                 console.log ('online now');
                 this.fetchDataForToday();
-                // this.data = localStorage.getItem('SurveyBank');
             }
         },
         methods: {
