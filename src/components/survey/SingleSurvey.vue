@@ -141,10 +141,11 @@
                 },
                 connectivityStatus: true,
                 valid: false,
+                email: '',
                 respondentanswer: {
                     id: null,
                     name: '',
-                    content: '345345345345345',
+                    content: '',
                     surveyId: ''
                 }
             }
@@ -172,15 +173,26 @@
                 //     this.snackbar = true;
                 //     this.Send()
                 // }
+                let value = 0;
+                let question = '';
+                let answer = '';
+                this.respondentanswer.content = "";
+                for (value; value< this.test.Questions.length; value++) {
+                    if (this.test.Questions[value].type == 2) {
+                        this.email = this.test.Questions[value].Answers;
+                    }
+                    question = this.test.Questions[value].name;
+                    answer = this.test.Questions[value].Answers;
+                    this.respondentanswer.content += "<h3>" + question + "</h3>";
+                    this.respondentanswer.content += "<p>" + answer + "</p>";
+                }
                 this.Send()
             },
             Send() {
-                this.respondentanswer.name = this.test.name;
-                this.respondentanswer.content = JSON.stringify(this.test.Questions, null, '\t');
+                this.respondentanswer.name = this.email;
                 this.respondentanswer.surveyId = this.test.id;
-                console.log(this.respondentanswer)
                 axios.post("https://172.16.12.104:9002/api/respondents", this.respondentanswer)
-                .then(res => console.log('send'))
+                .then(res => console.log(this.respondentanswer))
                 this.$refs.form.reset();
                 this.$router.push('/')
             }
