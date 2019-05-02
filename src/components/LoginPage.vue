@@ -3,6 +3,7 @@
         <v-layout
                 text-xs-center
                 wrap
+                v-if="!$session.exists()"
         >
             <v-flex xs12>
                 <h3 class="display-1 font-weight-bold mb-3">
@@ -32,6 +33,37 @@
             </v-flex>
 
         </v-layout>
+        <v-layout
+                text-xs-center
+                wrap
+                v-if="this.$session.exists()"
+        >
+
+            <v-flex xs12>
+                <h3 class="display-1 font-weight-bold mb-3">
+                    Выход из учетной записи
+                </h3>
+            </v-flex>
+            <v-flex mb-4>
+                <v-btn
+                        color="info"
+                        round
+                        center
+                        large
+                        @click="Stay()">
+                    Вернутся</v-btn>
+            </v-flex>
+            <v-flex mb-4>
+                <v-btn
+                        color="error"
+                        round
+                        center
+                        large
+                        @click="LogOut()">
+                    Выйти</v-btn>
+            </v-flex>
+
+        </v-layout>
     </v-container>
 </template>
 
@@ -40,15 +72,20 @@
         data: () => ({
             email: '',
             password: '',
-            online: false
         }),
         methods: {
             Login () {
                 if (this.email === 'admin' && this.password === 'admin') {
-                    this.online = true
-                    this.$session.start()
-                    this.$router.push('/home')
+                    this.$session.start();
+                    this.$router.push('/')
                 } else alert('неверный пароль или логин')
+            },
+            LogOut () {
+                this.$session.destroy()
+                this.$router.push('/')
+            },
+            Stay () {
+                this.$router.push('/')
             }
         }
     }

@@ -15,7 +15,10 @@
                 </v-toolbar>
 
 
-                    <template v-for="value in data">
+                    <template
+                            v-if="$session.exists()"
+                            v-for="value in data"
+                    >
                         <v-btn block color="primary" @click="GoToSurvey(value)">
                             {{ value.name }}
                         </v-btn>
