@@ -176,7 +176,6 @@
                 let value = 0;
                 let question = '';
                 let answer = '';
-                this.respondentanswer.content = "";
                 for (value; value< this.test.Questions.length; value++) {
                     if (this.test.Questions[value].type == 2) {
                         this.email = this.test.Questions[value].Answers;
@@ -191,8 +190,11 @@
             Send() {
                 this.respondentanswer.name = this.email;
                 this.respondentanswer.surveyId = this.test.id;
-                axios.post("https://172.16.12.104:9002/api/respondents", this.respondentanswer)
-                .then(res => console.log(this.respondentanswer))
+                localStorage.respondentAnswer = JSON.stringify(this.respondentanswer);
+                var emails= [];
+                emails.push(this.respondentanswer.name);
+                emails.push(localStorage.eSputnicEmail);
+                localStorage.eSputnicEmail = emails;
                 this.$refs.form.reset();
                 this.$router.push('/')
             }
