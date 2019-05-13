@@ -68,6 +68,7 @@
 </template>
 
 <script>
+import axios from 'axios'
     export default {
         data: () => ({
             email: '',
@@ -75,14 +76,24 @@
         }),
         methods: {
             Login () {
-                if (this.email === 'admin' && this.password === 'admin') {
-                    this.$session.start();
-                    this.$router.push('/')
-                } else alert('неверный пароль или логин')
+                axios.post("https://172.16.12.104:9008/api/login", {
+                    email: this.email,
+                    password: this.password
+                })
+                    .then(res => {
+                        console.log (res);
+                        if (res.data.status == true) {
+                            this.$session.start();
+                            this.$router.push('/');
+                            localStorage.userId = res.data.userId;
+                        }
+                        else alert ('Неверный пароль!');
+                    })
             },
             LogOut () {
-                this.$session.destroy()
-                this.$router.push('/')
+                this.$session.destroy();
+                this.$router.push('/');
+                window.localStorage.removeItem("user-id");
             },
             Stay () {
                 this.$router.push('/')

@@ -66,11 +66,8 @@ import axios from 'axios'
                             console.log ('Send to Back!');
                             window.localStorage.removeItem("respondentAnswer");
                             this.eSputnicEmail = localStorage.eSputnicEmail;
-                            console.log(this.eSputnicEmail);
+                            // console.log(this.eSputnicEmail);
                             this.sendToSputnic(this.eSputnicEmail);
-                            // вытаскивай мейлы здесь
-                            // window.localStorage.removeItem("eSputnicEmail");
-                            // this.sendToSputnic(this.eSputnicEmail);
                         })
                 }
             },

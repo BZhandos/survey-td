@@ -190,6 +190,7 @@
             Send() {
                 this.respondentanswer.name = this.email;
                 this.respondentanswer.surveyId = this.test.id;
+                this.respondentanswer.userId = localStorage.userId;
                 localStorage.respondentAnswer = JSON.stringify(this.respondentanswer);
                 var emails= [];
                 emails.push(this.respondentanswer.name);
