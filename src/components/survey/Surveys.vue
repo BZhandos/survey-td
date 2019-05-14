@@ -21,6 +21,8 @@
                     >
                         <v-btn block color="primary" @click="GoToSurvey(value)">
                             {{ value.name }}
+                            <!--<br><span class="caption"><br> w: {{ 0 + ' '}} </span>-->
+                            <!--<span class="caption"><br> M: {{ 0 }} </span>-->
                         </v-btn>
                     </template>
 
@@ -94,7 +96,7 @@ import axios from 'axios'
                                         password: 'techno123dom'
                                     }
                                 })
-                                .then(res => console.log(res))
+                                .then(res => console.log('Send to eSputnic!'))
                         }
                     }
                 }

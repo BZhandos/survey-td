@@ -105,7 +105,6 @@
                                         v-for="n in quest.Answers"
                                         :label="`${n.name}`"
                                         :value= false
-                                        :key= false
                                         v-model="n.checked"
                                         required
                                     ></v-checkbox>
@@ -124,7 +123,6 @@
     </v-card>
 </template>
 <script>
-    import axios from 'axios'
     export default {
         data () {
             return {
@@ -177,13 +175,22 @@
                 let question = '';
                 let answer = '';
                 for (value; value< this.test.Questions.length; value++) {
+                    question = this.test.Questions[value].name;
+                    this.respondentanswer.content += "<h3>" + question + "</h3>";
                     if (this.test.Questions[value].type == 2) {
                         this.email = this.test.Questions[value].Answers;
                     }
-                    question = this.test.Questions[value].name;
-                    answer = this.test.Questions[value].Answers;
-                    this.respondentanswer.content += "<h3>" + question + "</h3>";
-                    this.respondentanswer.content += "<p>" + answer + "</p>";
+                    if (this.test.Questions[value].type == 9) {
+                        for (let i=0; i< this.test.Questions[value].Answers.length; i++) {
+                            if (this.test.Questions[value].Answers[i].checked == true) {
+                                this.respondentanswer.content += "<p>" + this.test.Questions[value].Answers[i].name + "</p>";
+                            }
+                        }
+                    }
+                    else {
+                        answer = this.test.Questions[value].Answers;
+                        this.respondentanswer.content += "<p>" + answer + "</p>";
+                    }
                 }
                 this.Send()
             },
