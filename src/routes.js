@@ -6,6 +6,8 @@ import SingleSurvey from './components/survey/SingleSurvey'
 
 export const routes = [
     { path: '', component: Surveys},
+    { path: '/index.html', component: Surveys},
+    { path: '/', component: Surveys},
     { path: '/survey/:value', component: SingleSurvey},
     { path: '/login', component: LoginPage},
     { path: '/home', component: Home},
